@@ -21,11 +21,22 @@ export default function ProductDetailScreen({ route, navigation, cart, setCart }
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        const newProduct = { name, price, image };
-                        setCart([...cart, newProduct]);
-                        alert("Producto agregado al carrito");
-                    }}>
-                        <Text style={styles.buttonText}>Agregar al carrito</Text>
+                    // 1. Buscamos si el producto ya está en el carrito
+                    const existingProductIndex = cart.findIndex(item => item.name === name);
+
+                    if (existingProductIndex >= 0) {
+                    // 2. Si existe, copiamos el carrito y le sumamos 1 a la cantidad de ese producto (EVITAR DUPLICADOS)
+                    const updatedCart = [...cart];
+                    updatedCart[existingProductIndex].quantity += 1;
+                    setCart(updatedCart);
+                    } else {
+                    // 3. Si no existe, lo agregamos como nuevo con cantidad = 1
+                    const newProduct = { name, price, image, quantity: 1 };
+                    setCart([...cart, newProduct]);
+                    }
+                    alert("Producto agregado al carrito");
+                }}>
+                    <Text style={styles.buttonText}>Agregar al carrito</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
