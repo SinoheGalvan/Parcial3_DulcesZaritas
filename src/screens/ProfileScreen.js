@@ -8,8 +8,8 @@ export default function ProfileScreen() {
                 style={styles.image}
             />
 
-            <Text style={styles.name}>Usuario Demo</Text>
-            <Text style={styles.email}>usuario@correo.com</Text>
+            <Text style={styles.name}>Usuario Admin</Text>
+            <Text style={styles.email}>admin@correo.com</Text>
         </View>
     );
 }
