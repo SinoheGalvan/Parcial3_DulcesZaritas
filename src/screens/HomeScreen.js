@@ -1,39 +1,79 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import ProductCard from '../components/ProductCard';
 
 export default function HomeScreen({ navigation }) {
-    return (
-        <ScrollView style={styles.container}>
+    const products = [
+        {
+            id: "1",
+            name: "Caja Cine en Casa",
+            price: 499,
+            image: "https://i.redd.it/quickly-designed-this-movie-snack-box-for-a-surprise-home-v0-gk67d2eo6rta1.jpg?width=4032&format=pjpg&auto=webp&s=3bb783312da1dd674885416a6ab70dc1cb3f5271",
+            description: "Para esas ocaciones donde sientas que quieres sentir la sensación de estar en una sala de cine solo o acompañado, pero en la comodidad de tu casa.",
+        },
+        {
+            id: "3",
+            name: "Trufas Artesanales",
+            price: 350,
+            image: "https://truffelinos.com.co/wp-content/uploads/2025/10/truffelinos-fondo-banner-intermedio.jpg",
+            description: "Seguro que haz escuchado alguna vez de estas. No son más que una opción premium y gourmet para aquellos de paladar fino y que disfrutan de lo mejor que puedes probar para saciar tus ganas de un aperitivo dulce pero elegante a la vez.",
+        },
+    ];
+
+    const renderHeader = () => (
+        <View>
             <Image
-            source={require("../../assets/logo.png")}
-            style= {styles.logo} />
+                source={require("../../assets/logo.png")}
+                style={styles.logo} 
+            />
             <Text style={styles.sectionTitle}>
                 Dulce y diversiones Zaritas
             </Text>
             <Image 
-            source={{uri: "https://youtalkonline.com/wp-content/uploads/Dulces-en-ingles-725x408.jpg"}}
-            style={styles.banner} />
+                source={require("../../assets/banner-bienvenida.png")}
+                style={styles.banner} 
+            />
             <Text style={styles.sectionTitle}>
                 Productos destacados
             </Text>
-            <View style={styles.productsPreview}>
-                <View style={styles.productCard}>
-                    <Text> Producto 1</Text>
-                </View>
-                <View style={styles.productCard}>
-                    <Text> Producto 2</Text>
-                </View>
+        </View>
+    );
+
+    const renderFooter = () => (
+        <View style={styles.footerContainer}>
+            <View style={styles.actions}>
+                <TouchableOpacity onPress={() => navigation.navigate("ProductList")}>
+                    <Text style={styles.button}>Ver el resto del catálogo</Text>
+                </TouchableOpacity>
             </View>
             <Image 
-            source={{uri: "https://www.ntrguadalajara.com/evidimg/2018-05-07_10-05-56___6538.jpg"}}
-            style={styles.banner} />
-            <View style={styles.actions}>
-                <TouchableOpacity
-                onPress={() => navigation.navigate("ProductList")}
-                >
-                <Text style={styles.button}>Ver catálogo</Text>
-            </TouchableOpacity>
-            </View>
-        </ScrollView>
+                source={require("../../assets/banner-envio.png")}
+                style={styles.banner} 
+            />
+        </View>
+    );
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={products}
+                keyExtractor={(item) => item.id}
+                numColumns={2}
+                columnWrapperStyle={styles.rowWrapper}
+                renderItem={({ item }) => (
+                    <ProductCard 
+                        name={item.name}
+                        price={item.price}
+                        image={item.image}
+                        description={item.description}
+                        navigation={navigation} 
+                    />
+                )}
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={renderHeader}
+                ListFooterComponent={renderFooter}
+                contentContainerStyle={styles.listContainer}
+            />
+        </View>
     );
 }
 
@@ -42,12 +82,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#f9b0b0"
     },
+    listContainer: {
+        paddingBottom: 30, 
+    },
+    rowWrapper: {
+        justifyContent: 'space-between',
+        width: '90%',
+        alignSelf: 'center',
+        marginTop: 20,
+    },
     logo: {
         width: 120,
         height: 120,
         borderRadius: 120,
         alignSelf: "center",
-        marginTop: 20,
+        marginTop: 40,
         resizeMode: "contain",
     },
     banner: {
@@ -64,31 +113,20 @@ const styles = StyleSheet.create({
         marginTop: 30,
         textAlign: "center",
     },
-    productsPreview: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginTop: 20 
-    },
-    productCard: {
-        width: 120,
-        height: 120,
-        backgroundColor: "#fff",
-        borderRadius: 10,
-        justifyContent: "center",
-        alignItems: "center",
-        elevation: 3,
+    footerContainer: {
+        marginTop: 20,
     },
     button: {
-        width: 120,
+        width: 200,
         height: 30,
         backgroundColor: "#fff",
         borderRadius: 10,
         textAlign: "center",
-        marginTop: 30,
-        marginLeft: "10%",
+        textAlignVertical: "center",
+        marginTop: 10,
     },
     actions: {
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "center",
     },
 });

@@ -14,14 +14,14 @@ export default function ProductListScreen( { navigation }) {
             id: "2",
             name: "Kit de Supervivencia de Cumpleaños",
             price: 899,
-            image: "https://m.media-amazon.com/images/I/91Rq44dnezL._AC_UF350,350_QL80_.jpg",
+            image: "https://i.etsystatic.com/24178969/r/il/52d0c7/3271148096/il_fullxfull.3271148096_5bu0.jpg",
             description: "¿Aún no haz planeado nada para tú cumpleaños o el de otra persona?. No hay problema, que el KIT DE SUPERVIVENCIA DE CUMPLEAÑOS viene a salvar la fiesta con la cantidad selecta de snacks, dulces y demás apetitivos que este paquete incluye.",
         },
         {
             id: "3",
             name: "Trufas Artesanales",
             price: 350,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGjx9sTk4RjzsORjtiQGR-7NTcIjlyjhsy4w&s",
+            image: "https://truffelinos.com.co/wp-content/uploads/2025/10/truffelinos-fondo-banner-intermedio.jpg",
             description: "Seguro que haz escuchado alguna vez de estas. No son más que una opción premium y gourmet para aquellos de paladar fino y que disfrutan de lo mejor que puedes probar para saciar tus ganas de un aperitivo dulce pero elegante a la vez.",
         },
         {
